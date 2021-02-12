@@ -12,7 +12,7 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
-    print(f'{client.user.name} has connected to Discord!')
+  print(f'{client.user.name} has connected to Discord!')
 
 @client.event
 async def on_member_join(member):
@@ -25,29 +25,22 @@ async def on_member_join(member):
 async def on_message(message):
     if message.author == client.user:
         return
-
-    response = 'https://media.giphy.com/media/8vIFoKU8s4m4CBqCao/giphy.gif'
-
-
-    msg = message.content.lower()
-    arr = [
-      'edyta',
-      'edyte',
-      'edytę',
-      'edytą',
-      'edytka',
-    ]
-
-    edytaWarning = False
-
-    for f in arr:
-      if f in msg:
-        edytaWarning = True
-
-    if edytaWarning:
-      await message.channel.send(response)
-
-    # tempMsg = message.content.contains
     
-
+    if message.author.name == 'Noizer':
+      edytaWarning = False
+      response = 'https://media.giphy.com/media/8vIFoKU8s4m4CBqCao/giphy.gif'
+      msg = message.content.lower()
+      arr = [
+        'edyta',
+        'edyte',
+        'edytę',
+        'edytą',
+        'edytka',
+      ]
+      for f in arr:
+        if f in msg:
+          edytaWarning = True
+      if edytaWarning:
+        await message.channel.send(response)
+    
 client.run(TOKEN)
