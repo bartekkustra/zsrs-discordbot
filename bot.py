@@ -25,8 +25,10 @@ async def on_member_join(member):
 async def on_message(message):
     if message.author == client.user:
         return
+
+    print(message.author.id)
     
-    if message.author.name == 'Noizer':
+    if message.author.id == '251051662645526529':
       edytaWarning = False
       response = 'https://media.giphy.com/media/8vIFoKU8s4m4CBqCao/giphy.gif'
       msg = message.content.lower()
