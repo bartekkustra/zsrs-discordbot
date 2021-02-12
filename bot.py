@@ -36,7 +36,6 @@ async def on_message(message):
       'edytę',
       'edytą',
       'edytka',
-      'edzia',
     ]
 
     edytaWarning = False
