@@ -26,9 +26,11 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    print(message.author.id)
+    print(message.author.id, message.author.name)
     
-    if message.author.id == '251051662645526529':
+    # Noizer 251051662645526529
+    # Nosek 253700474593607680
+    if message.author.id == 251051662645526529:
       edytaWarning = False
       response = 'https://media.giphy.com/media/8vIFoKU8s4m4CBqCao/giphy.gif'
       msg = message.content.lower()
