@@ -25,26 +25,21 @@ async def on_member_join(member):
 async def on_message(message):
     if message.author == client.user:
         return
-
-    print(message.author.id, message.author.name)
     
     # Noizer 251051662645526529
     # Nosek 253700474593607680
-    if message.author.id == 251051662645526529:
-      edytaWarning = False
-      response = 'https://media.giphy.com/media/8vIFoKU8s4m4CBqCao/giphy.gif'
-      msg = message.content.lower()
-      arr = [
-        'edyta',
-        'edyte',
-        'edytę',
-        'edytą',
-        'edytka',
-      ]
-      for f in arr:
-        if f in msg:
-          edytaWarning = True
-      if edytaWarning:
+    # if message.author.id == 251051662645526529:
+    response = 'https://media.giphy.com/media/8vIFoKU8s4m4CBqCao/giphy.gif'
+    msg = message.content.lower()
+    arr = [
+      'edyta',
+      'edyte',
+      'edytę',
+      'edytą',
+      'edytka',
+    ]
+    for f in arr:
+      if f in msg:
         await message.channel.send(response)
     
 client.run(TOKEN)
