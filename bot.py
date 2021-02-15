@@ -3,6 +3,7 @@ import os
 import random
 
 import discord
+import validators
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -26,11 +27,9 @@ async def on_message(message):
     if message.author == client.user:
         return
     
-    # Noizer 251051662645526529
-    # Nosek 253700474593607680
-    # if message.author.id == 251051662645526529:
+    # edyta
     response = 'https://media.giphy.com/media/8vIFoKU8s4m4CBqCao/giphy.gif'
-    msg = message.content.lower()
+    edyta_msg = message.content.lower()
     arr = [
       'edyta',
       'edyte',
@@ -40,7 +39,19 @@ async def on_message(message):
       'eԁyta',
     ]
     for f in arr:
-      if f in msg:
+      if f in edyta_msg:
         await message.channel.send(response)
+
+    # url
+    url_msg = message.content
+    msgArr = url_msg.split()
+    for x in msgArr:
+      if validators.url(x):
+        y = x.split('?')
+        if len(y) > 1 and 'youtube' not in y[0] and 'google' not in y[0]:
+          await message.delete()
+          await message.channel.send(content="wrzuc url bez tracking id (wyjeb wsio po ?)")
+  
+
     
 client.run(TOKEN)
