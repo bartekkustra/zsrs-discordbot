@@ -37,6 +37,7 @@ async def on_message(message):
       'edytę',
       'edytą',
       'edytka',
+      'eԁyta',
     ]
     for f in arr:
       if f in msg:
