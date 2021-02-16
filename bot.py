@@ -34,7 +34,7 @@ async def on_message(message):
 # url
   url_msg = message.content
   msgArr = url_msg.split()
-  print
+
   for x in msgArr:
     if validators.url(x):
       y = x.split('?')
