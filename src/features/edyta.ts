@@ -1,6 +1,6 @@
 import { Message } from 'discord.js'
 
-export const checkForEdyta = (msg: Message): string => {
+export const checkForEdyta = (msg: Message): void => {
   const response = 'https://media.giphy.com/media/8vIFoKU8s4m4CBqCao/giphy.gif'
   const arr = [
     'edyta',
@@ -15,6 +15,4 @@ export const checkForEdyta = (msg: Message): string => {
   if (regexp.test(msg.content.toLowerCase())) {
     msg.channel.send(response)
   }
-  
-  return `Message: ${msg}`
 }
