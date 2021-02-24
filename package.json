@@ -9,6 +9,9 @@
     "build": "rimraf ./build && tsc",
     "lint": "eslint . --ext .ts"
   },
+  "engines": {
+    "node": "14.15.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/bartekkustra/zsrs-discordbot.git"
