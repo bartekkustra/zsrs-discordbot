@@ -16,6 +16,10 @@
     "quotes": ["error", "single", {
       "avoidEscape": true,
       "allowTemplateLiterals": true
+    }],
+    "keyword-spacing": ["error", {
+      "before": true,
+      "after": true
     }]
   }
 }
