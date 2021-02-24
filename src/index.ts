@@ -12,7 +12,6 @@ client.on('message', async msg => {
     return
   }
 
-  console.log('TEST')
   checkForEdyta(msg)
 })
 
