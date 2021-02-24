@@ -7,7 +7,7 @@ export const checkForUrl = (msg: Message): void => {
     require_protocol: true,
     require_valid_protocol: true
   }
-  const whitelistUrls = [
+  const allowListUrls = [
     'youtube',
     'youtu.be',
     'google',
@@ -28,7 +28,9 @@ export const checkForUrl = (msg: Message): void => {
         }
 
         if (url) {
-          whitelistUrls.some(x => url.origin.includes(x))
+          if (allowListUrls.some(x => url.origin.includes(x))) {
+            return
+          }
           const baseUrl = url.origin + url.pathname
           const params = {
             str: url.search,
