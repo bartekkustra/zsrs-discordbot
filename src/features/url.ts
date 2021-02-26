@@ -2,6 +2,9 @@ import validate from 'validator'
 import { Message, MessageEmbed } from 'discord.js'
 import { URL } from 'url'
 
+// http://a.b
+const MINIMUM_URL_LENGTH = 10
+
 export const checkForUrl = (msg: Message): void => {
   const urlOptions = {
     require_protocol: true,
@@ -15,7 +18,7 @@ export const checkForUrl = (msg: Message): void => {
     'stackoverflow',
   ]
 
-  if (msg.content.length > 10) {
+  if (msg.content.length >= MINIMUM_URL_LENGTH) {
     const msgArr = msg.content.split(' ')
     msgArr.forEach(el => {
       if (validate.isURL(el, urlOptions)) {
