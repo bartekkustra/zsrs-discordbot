@@ -8,10 +8,9 @@ export const checkForEdyta = (msg: Message): void => {
     'edytę',
     'edytą',
     'edytka',
-    'eԁyta',
   ]
 
-  const regexp = new RegExp(`(^|\\W)(${arr.join('|')})`)
+  const regexp = new RegExp(`(^|\\W)(${arr.join('|')})($|\\W)`, 'gm')
   if (regexp.test(msg.content.toLowerCase())) {
     msg.channel.send(response)
   }
