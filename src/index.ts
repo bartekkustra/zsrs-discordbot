@@ -5,6 +5,7 @@ import features from './features'
 const {
   checkForEdyta,
   checkForUrl,
+  gamesBot,
   helpCommand,
 } = features
 
@@ -18,6 +19,7 @@ client.on('message', async msg => {
 
   checkForEdyta(msg)
   checkForUrl(msg)
+  gamesBot(msg)
   helpCommand(msg, client.user)
 })
 

@@ -20,6 +20,10 @@ export const helpCommand = (msg: Message, bot: ClientUser): void => {
         cmd: '{url}?param=abc',
         desc: 'When URL with parameters is sent, bot will clean the url from parameters but keep also the original message'
       },
+      {
+        cmd: '!games',
+        desc: 'Shows ip addresses of current game servers we play on',
+      }
     ]
 
     const embed = new MessageEmbed({
