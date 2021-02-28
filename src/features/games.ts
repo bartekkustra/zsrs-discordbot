@@ -20,7 +20,7 @@ export const gamesBot = (msg: Message): void => {
         desc: [
           'https://store.steampowered.com/app/892970/Valheim/',
           'ip: 168.119.0.159:2526',
-          'pass: 40rig3qr',
+          `pass: ${process.env.VALHEIM_PASS}`,
         ]
       }
     ]
