@@ -6,6 +6,7 @@ const {
   checkForEdyta,
   checkForUrl,
   gamesBot,
+  helpCommand,
 } = features
 
 const client = new Discord.Client()
@@ -19,6 +20,7 @@ client.on('message', async msg => {
   checkForEdyta(msg)
   checkForUrl(msg)
   gamesBot(msg)
+  helpCommand(msg, client.user)
 })
 
 client.login(process.env.DISCORD_TOKEN)
