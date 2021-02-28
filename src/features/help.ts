@@ -1,11 +1,11 @@
-import { Client, Message, MessageEmbed } from 'discord.js';
+import { ClientUser, Message, MessageEmbed } from 'discord.js';
 
 type DetailsList = Array<{
   cmd: string,
   desc: string,
 }>
 
-export const helpCommand = (msg: Message, client: Client): void => {
+export const helpCommand = (msg: Message, bot: ClientUser): void => {
   if (msg.content === '!help') {
     const details: DetailsList = [
       {
@@ -26,8 +26,8 @@ export const helpCommand = (msg: Message, client: Client): void => {
       title: 'Help!',
       description: `Want to know what's triggering bot? Here's the list of commands and features`,
       author: {
-        name: client.user.username,
-        iconURL: client.user.displayAvatarURL(),
+        name: bot.username,
+        iconURL: bot.displayAvatarURL(),
       },
       color: 0x33CC33,
     })

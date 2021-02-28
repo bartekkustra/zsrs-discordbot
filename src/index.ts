@@ -18,7 +18,7 @@ client.on('message', async msg => {
 
   checkForEdyta(msg)
   checkForUrl(msg)
-  helpCommand(msg, client)
+  helpCommand(msg, client.user)
 })
 
 client.login(process.env.DISCORD_TOKEN)
