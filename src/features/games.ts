@@ -1,11 +1,11 @@
-import { Message, MessageEmbed } from "discord.js";
+import { Message, MessageEmbed } from 'discord.js';
 
 type GamesList = Array<{
   name: string,
   desc: Array<string>,
 }>
 
-export const gamesBot = (msg: Message) => {
+export const gamesBot = (msg: Message): void => {
   if (msg.content === '!games') {
     const games: GamesList = [
       {
