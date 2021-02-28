@@ -5,6 +5,7 @@ import features from './features'
 const {
   checkForEdyta,
   checkForUrl,
+  gamesBot,
 } = features
 
 const client = new Discord.Client()
@@ -17,6 +18,7 @@ client.on('message', async msg => {
 
   checkForEdyta(msg)
   checkForUrl(msg)
+  gamesBot(msg)
 })
 
 client.login(process.env.DISCORD_TOKEN)
