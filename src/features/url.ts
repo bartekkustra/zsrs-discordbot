@@ -19,7 +19,7 @@ export const checkForUrl = (msg: Message): void => {
   ]
 
   if (msg.content.length >= MINIMUM_URL_LENGTH) {
-    const msgArr = msg.content.split(' ')
+    const msgArr = msg.content.trim().replace(/\n/gi, ' ').split(' ')
     msgArr.forEach(el => {
       if (validate.isURL(el, urlOptions)) {
         let url: URL;
