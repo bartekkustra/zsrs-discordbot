@@ -22,7 +22,7 @@ var checkForUrl = function (msg) {
         'stackoverflow',
     ];
     if (msg.content.length >= MINIMUM_URL_LENGTH) {
-        var msgArr = msg.content.split(' ');
+        var msgArr = msg.content.trim().replace(/\n/gi, ' ').split(' ');
         msgArr.forEach(function (el) {
             if (validator_1.default.isURL(el, urlOptions)) {
                 var url_2;

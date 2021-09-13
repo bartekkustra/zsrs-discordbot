@@ -42,7 +42,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var discord_js_1 = __importDefault(require("discord.js"));
 var dotenv_1 = __importDefault(require("dotenv"));
 var features_1 = __importDefault(require("./features"));
-var checkForEdyta = features_1.default.checkForEdyta, checkForUrl = features_1.default.checkForUrl;
+var checkForEdyta = features_1.default.checkForEdyta, checkForUrl = features_1.default.checkForUrl, gamesBot = features_1.default.gamesBot, helpCommand = features_1.default.helpCommand;
 var client = new discord_js_1.default.Client();
 dotenv_1.default.config();
 client.on('message', function (msg) { return __awaiter(void 0, void 0, void 0, function () {
@@ -52,6 +52,8 @@ client.on('message', function (msg) { return __awaiter(void 0, void 0, void 0, f
         }
         checkForEdyta(msg);
         checkForUrl(msg);
+        gamesBot(msg);
+        helpCommand(msg, client.user);
         return [2 /*return*/];
     });
 }); });

@@ -1,9 +1,10 @@
 import Discord from 'discord.js'
 import dotenv from 'dotenv'
-
 import features from './features'
+
 const {
   checkForEdyta,
+  checkForCzarek,
   checkForUrl,
   gamesBot,
   helpCommand,
@@ -18,6 +19,7 @@ client.on('message', async msg => {
   }
 
   checkForEdyta(msg)
+  checkForCzarek(msg)
   checkForUrl(msg)
   gamesBot(msg)
   helpCommand(msg, client.user)

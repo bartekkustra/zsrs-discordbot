@@ -17,6 +17,10 @@ export const helpCommand = (msg: Message, bot: ClientUser): void => {
         desc: 'Shames Noizer for mentioning her (or anyone else for that matter)'
       },
       {
+        cmd: 'czarek',
+        desc: 'Shames Noizer for working with Czarek',
+      },
+      {
         cmd: '{url}?param=abc',
         desc: 'When URL with parameters is sent, bot will clean the url from parameters but keep also the original message'
       },
