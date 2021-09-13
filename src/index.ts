@@ -7,6 +7,7 @@ const {
   checkForCzarek,
   checkForUrl,
   gamesBot,
+  szczepienie,
   helpCommand,
 } = features
 
