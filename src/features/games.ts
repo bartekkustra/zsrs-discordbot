@@ -32,6 +32,6 @@ export const gamesBot = (msg: Message): void => {
       embed.addField(game.name, game.desc.join('\n'), false)
     })
 
-    msg.channel.send(embed)
+    msg.channel.send({ embeds: [embed] })
   }
 }

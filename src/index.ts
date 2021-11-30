@@ -1,4 +1,4 @@
-import Discord from 'discord.js'
+import { Client, Intents } from 'discord.js'
 import dotenv from 'dotenv'
 import features from './features'
 
@@ -8,7 +8,10 @@ const {
   helpCommand,
 } = features
 
-const client = new Discord.Client()
+const client = new Client({ intents: [
+  Intents.FLAGS.GUILDS,
+  Intents.FLAGS.GUILD_MESSAGES,
+] })
 dotenv.config()
 
 client.on('message', async msg => {
