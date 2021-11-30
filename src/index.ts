@@ -3,11 +3,8 @@ import dotenv from 'dotenv'
 import features from './features'
 
 const {
-  checkForEdyta,
-  checkForCzarek,
   checkForUrl,
   gamesBot,
-  szczepienie,
   helpCommand,
 } = features
 
@@ -19,8 +16,6 @@ client.on('message', async msg => {
     return
   }
 
-  checkForEdyta(msg)
-  checkForCzarek(msg)
   checkForUrl(msg)
   gamesBot(msg)
   helpCommand(msg, client.user)
