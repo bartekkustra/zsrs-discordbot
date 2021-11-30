@@ -11,6 +11,6 @@ npm install
 ```
 
 4. Always make sure to push features to new branch with `git checkout -b branch-name`
-5. To run local development server use `npm run start:dev`
+5. To run local development server use `npm run start:dev` (please note that it'll keep the main bot running!)
 6. Always create Pull Requests and make sure to get a code review from somebody
 7. It's recommended to use IDE that has ESLint enabled. You can do `npm run lint` to check for errors and warnings. This command will also try to fix your code issues.
