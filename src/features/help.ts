@@ -44,6 +44,6 @@ export const helpCommand = (msg: Message, bot: ClientUser): void => {
       embed.addField(command.cmd, command.desc, false)
     })
 
-    msg.channel.send(embed)
+    msg.channel.send({ embeds: [embed] })
   }
 }

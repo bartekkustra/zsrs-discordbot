@@ -61,7 +61,7 @@ export const checkForUrl = (msg: Message): void => {
             embed.addField(`Original message (from: ${msg.author.username})`, msg.content, false)
             paramsStr && embed.addField('List of params', paramsStr, false)
             embed.addField('Report the issue', 'https://github.com/bartekkustra/zsrs-discordbot/issues/new', false)
-            msg.channel.send(embed)
+            msg.channel.send({ embeds: [embed] })
           }
         }
       }
