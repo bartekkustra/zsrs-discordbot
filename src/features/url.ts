@@ -1,6 +1,7 @@
 import validate from 'validator'
 import { Message, MessageEmbed } from 'discord.js'
 import { URL } from 'url'
+import { Tags } from '../db'
 
 // http://a.b
 const MINIMUM_URL_LENGTH = 10
@@ -18,9 +19,10 @@ export const checkForUrl = (msg: Message): void => {
     'stackoverflow',
   ]
 
+  // TODO: allowlist instead of blocklist
   if (msg.content.length >= MINIMUM_URL_LENGTH) {
     const msgArr = msg.content.trim().replace(/\n/gi, ' ').split(' ')
-    msgArr.forEach(el => {
+    msgArr.forEach(async el => {
       if (validate.isURL(el, urlOptions)) {
         let url: URL;
         try {
@@ -40,28 +42,37 @@ export const checkForUrl = (msg: Message): void => {
             map: url.searchParams,
           }
 
+          // get a list of params from the db
+          const trackingList = await Tags.findAll({ attributes: ['name'] })
+          const trackingArr = trackingList.map(t => t.getDataValue('name'))
+
+          let paramsMap = new Map()
+          params.map.forEach((value, param) => {
+            if (!trackingArr.includes(param)) {
+              paramsMap.set(param, value)
+            }
+          })
+          console.log(paramsMap)
+
           if (params.str) {
-            // TODO: add params to db for metrics
             let paramsStr = ''
-            params.map.forEach((value: string, key: string) => {
+            paramsMap.forEach(( value: string, key: string) => {
               paramsStr += `- ${key} → ${value}\n`
             })
-  
-            msg.delete()
-            const embed = new MessageEmbed({
-              title: 'Possible Tracking ID in the url',
-              description: 'Please make sure to remove tracking ids if necessary from the url.',
-              author: {
-                name: `by ${msg.author.username}`,
-                iconURL: msg.author.displayAvatarURL(),
-              },
-              color: 0x33CC33
-            })
+
+            // msg.delete()
+
+            const embed = new MessageEmbed()
+            embed.setDescription('Please make sure to remove tracking ids if necessary from the url.')
+            embed.setColor('#33cc33')
             embed.addField('Clear link', baseUrl, false)
-            embed.addField(`Original message (from: ${msg.author.username})`, msg.content, false)
-            paramsStr && embed.addField('List of params', paramsStr, false)
-            embed.addField('Report the issue', 'https://github.com/bartekkustra/zsrs-discordbot/issues/new', false)
-            msg.channel.send({ embeds: [embed] })
+            // embed.addField(`Original message (from ${msg.author.username})`, msg.content, false)
+
+            paramsStr && embed.addField('List of unknown params', paramsStr, false)
+            embed.addField('Add tracking ids', 'Use `/tracking` command to add known tracking ids', false)
+            embed.addField('Report the issue', '[link](https://github.com/bartekkustra/zsrs-discordbot/issues/new)', false)
+
+            msg.reply({ embeds: [embed] })
           }
         }
       }
