@@ -1,1 +1,5 @@
-export * from './tags'
+import tracking from './tracking'
+
+export default {
+  tracking
+}

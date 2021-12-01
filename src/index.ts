@@ -8,16 +8,10 @@ import { REST } from '@discordjs/rest'
 import { Routes } from 'discord-api-types/v9'
 import fs from 'fs'
 
-import { tagsResponse } from './cmd_responses'
+import RESPONSES from './cmd_responses'
 
 dotenv.config()
 
-type TagType = {
-  name: string,
-  createdBy?: string,
-  usage_count?: number
-}
-const IS_EPHEMERAL = true
 const commands: any[] = []
 const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.ts'))
 
@@ -49,7 +43,7 @@ const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN);
       { body: commands })
     console.log('Successfully reloaded application (/) commands')
   } catch(error) {
-    console.error(error)
+    console.log(error)
   }
 })()
 
@@ -63,8 +57,8 @@ client.on('interactionCreate', async interaction => {
 
   const { commandName } = interaction
 
-  if (commandName === 'tags') {
-    tagsResponse(interaction)
+  if (commandName === 'tracking') {
+    RESPONSES.tracking(interaction)
   }
 });
 

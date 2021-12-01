@@ -2,7 +2,7 @@ const IS_EPHEMERAL = true
 import { CommandInteraction, CacheType } from 'discord.js';
 import { Tags } from '../db'
 
-export const tagsResponse = async (interaction: CommandInteraction<CacheType>) => {
+const tracking = async (interaction: CommandInteraction<CacheType>) => {
   const { options } = interaction;
 
   const subcommand = options.getSubcommand()
@@ -77,3 +77,5 @@ export const tagsResponse = async (interaction: CommandInteraction<CacheType>) =
       break;
   }
 }
+
+export default tracking
