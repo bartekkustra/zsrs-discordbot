@@ -16,6 +16,7 @@ const commands: any[] = []
 const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.ts'))
 
 for (const file of commandFiles) {
+  /* eslint-disable-next-line @typescript-eslint/no-var-requires */
 	const command = require(`./commands/${file}`);
 	commands.push(command.data.toJSON());
 }
@@ -42,7 +43,7 @@ const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN);
       Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID), 
       { body: commands })
     console.log('Successfully reloaded application (/) commands')
-  } catch(error) {
+  } catch (error) {
     console.log(error)
   }
 })()
@@ -53,7 +54,7 @@ client.on('ready', async () => {
 })
 
 client.on('interactionCreate', async interaction => {
-	if (!interaction.isCommand()) return;
+	if (!interaction.isCommand()) {return;}
 
   const { commandName } = interaction
 

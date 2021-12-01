@@ -10,7 +10,7 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "rules": {
-    "no-console": 2,
+    "no-console": 1,
     "curly": 2,
     "eqeqeq": 2,
     "quotes": ["error", "single", {

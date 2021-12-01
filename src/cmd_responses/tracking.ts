@@ -2,26 +2,26 @@ const IS_EPHEMERAL = true
 import { CommandInteraction, CacheType } from 'discord.js';
 import { Tags } from '../db'
 
-const tracking = async (interaction: CommandInteraction<CacheType>) => {
+const tracking = async (interaction: CommandInteraction<CacheType>): Promise<void> => {
   const { options } = interaction;
 
   const subcommand = options.getSubcommand()
   let tagName;
   
-  switch(subcommand) {
-    case 'add':
+  switch (subcommand) {
+    case 'add': {
       try {
         tagName = options.get('name').value
         // eq: INSERT INTO tags (name, createdBy) values (?, ?)
-        const tag = await Tags.create({
+        await Tags.create({
           name: tagName,
           createdBy: interaction.user.username,
         })
-  
+
         return interaction.reply({
           content: `Tag ${tagName} added.`,
           ephemeral: IS_EPHEMERAL,
-        })
+          })
       } catch (error: any) {
         if (error.name === 'SequelizeUniqueConstraintError') {
           return interaction.reply({
@@ -36,8 +36,8 @@ const tracking = async (interaction: CommandInteraction<CacheType>) => {
         })
       }
       break;
-    
-    case 'info':
+    }
+    case 'info': {
       tagName = options.get('name').value
       const tag = await Tags.findOne({ where: { name: tagName } })
   
@@ -55,8 +55,9 @@ const tracking = async (interaction: CommandInteraction<CacheType>) => {
         ephemeral: IS_EPHEMERAL,
       })
       break;
+    }
     
-    case 'list':
+    case 'list': {
       const tagList = await Tags.findAll({ attributes: ['name'] })
   
       const tagString = tagList
@@ -67,14 +68,16 @@ const tracking = async (interaction: CommandInteraction<CacheType>) => {
         ephemeral: IS_EPHEMERAL,
       })
       break;
-    
-    case 'remove':
+    }
+
+    case 'remove': {
       tagName = options.get('name').value
   
       const rowCount = await Tags.destroy({ where: { name: tagName } })
-      if (!rowCount) return interaction.reply('That tag does not exist.')
+      if (!rowCount) {return interaction.reply('That tag does not exist.')}
       return interaction.reply('Tag deleted')
       break;
+    }    
   }
 }
 
