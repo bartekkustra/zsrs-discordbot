@@ -1,6 +1,6 @@
 const IS_EPHEMERAL = true
 import { CommandInteraction, CacheType } from 'discord.js';
-import { Tags } from '../db'
+import { Trackers } from '../db'
 
 const tracking = async (interaction: CommandInteraction<CacheType>): Promise<void> => {
   const { options } = interaction;
@@ -11,17 +11,17 @@ const tracking = async (interaction: CommandInteraction<CacheType>): Promise<voi
   switch (subcommand) {
     case 'add': {
       try {
-        tagName = options.get('name').value
+        tagName = options.get('tracking_id').value
         // eq: INSERT INTO tags (name, createdBy) values (?, ?)
-        await Tags.create({
-          name: tagName,
+        await Trackers.create({
+          tracking_id: tagName,
           createdBy: interaction.user.username,
         })
 
         return interaction.reply({
           content: `Tag ${tagName} added.`,
           ephemeral: IS_EPHEMERAL,
-          })
+        })
       } catch (error: any) {
         if (error.name === 'SequelizeUniqueConstraintError') {
           return interaction.reply({
@@ -38,8 +38,8 @@ const tracking = async (interaction: CommandInteraction<CacheType>): Promise<voi
       break;
     }
     case 'info': {
-      tagName = options.get('name').value
-      const tag = await Tags.findOne({ where: { name: tagName } })
+      tagName = options.get('tracking_id').value
+      const tag = await Trackers.findOne({ where: { tracking_id: tagName } })
   
       if (tag) {
         const createdBy = tag.getDataValue('createdBy')
@@ -58,10 +58,10 @@ const tracking = async (interaction: CommandInteraction<CacheType>): Promise<voi
     }
     
     case 'list': {
-      const tagList = await Tags.findAll({ attributes: ['name'] })
+      const tagList = await Trackers.findAll({ attributes: ['tracking_id'] })
   
       const tagString = tagList
-        .map(t => `- ${t.getDataValue('name')}`)
+        .map(t => `- ${t.getDataValue('tracking_id')}`)
         .join('\n') || 'No tags set.'
       return interaction.reply({
         content: `List of tags: \`\`\`\n${tagString}\`\`\``,
@@ -71,9 +71,9 @@ const tracking = async (interaction: CommandInteraction<CacheType>): Promise<voi
     }
 
     case 'remove': {
-      tagName = options.get('name').value
+      tagName = options.get('tracking_id').value
   
-      const rowCount = await Tags.destroy({ where: { name: tagName } })
+      const rowCount = await Trackers.destroy({ where: { tracking_id: tagName } })
       if (!rowCount) {return interaction.reply('That tag does not exist.')}
       return interaction.reply('Tag deleted')
       break;

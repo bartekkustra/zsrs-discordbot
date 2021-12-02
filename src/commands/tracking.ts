@@ -7,13 +7,13 @@ export const data = new SlashCommandBuilder()
     return subcommand
       .setName('add')
       .setDescription('Adds new tracking id to database')
-      .addStringOption(option => option.setName('name').setDescription('Tracking id name').setRequired(true))
+      .addStringOption(option => option.setName('tracking_id').setDescription('Tracking id name').setRequired(true))
   })
   .addSubcommand(subcommand => {
     return subcommand
       .setName('info')
       .setDescription('Get details about a tracking id')
-      .addStringOption(option => option.setName('name').setDescription('Tracking id name').setRequired(true))
+      .addStringOption(option => option.setName('tracking_id').setDescription('Tracking id name').setRequired(true))
   })
   .addSubcommand(subcommand => {
     return subcommand
@@ -24,5 +24,5 @@ export const data = new SlashCommandBuilder()
     return subcommand
       .setName('remove')
       .setDescription('Remove a specific tracking id')
-      .addStringOption(option => option.setName('name').setDescription('Tracking id name').setRequired(true))
+      .addStringOption(option => option.setName('tracking_id').setDescription('Tracking id name').setRequired(true))
   })

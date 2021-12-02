@@ -2,7 +2,7 @@ import { Client, Intents, Message } from 'discord.js'
 import dotenv from 'dotenv'
 
 import features from './features'
-import { Tags } from './db'
+import { Trackers, AllowedSites } from './db'
 
 import { REST } from '@discordjs/rest'
 import { Routes } from 'discord-api-types/v9'
@@ -49,7 +49,8 @@ const rest = new REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN);
 })()
 
 client.on('ready', async () => {
-  Tags.sync()
+  Trackers.sync()
+  AllowedSites.sync()
   console.log('Ready!')
 })
 
@@ -60,6 +61,8 @@ client.on('interactionCreate', async interaction => {
 
   if (commandName === 'tracking') {
     RESPONSES.tracking(interaction)
+  } else if (commandName === 'allowedsites') {
+    RESPONSES.allowedsites(interaction)
   }
 });
 

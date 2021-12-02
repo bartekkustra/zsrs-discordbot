@@ -1,7 +1,7 @@
 import validate from 'validator'
 import { Message, MessageEmbed } from 'discord.js'
 import { URL } from 'url'
-import { Tags } from '../db'
+import { Trackers } from '../db'
 
 // http://a.b
 const MINIMUM_URL_LENGTH = 10
@@ -43,8 +43,8 @@ export const checkForUrl = (msg: Message): void => {
           }
 
           // get a list of params from the db
-          const trackingList = await Tags.findAll({ attributes: ['name'] })
-          const trackingArr = trackingList.map(t => t.getDataValue('name'))
+          const trackingList = await Trackers.findAll({ attributes: ['tracking_id'] })
+          const trackingArr = trackingList.map(t => t.getDataValue('tracking_id'))
 
           let paramsMap = new Map()
           params.map.forEach((value, param) => {
@@ -52,7 +52,6 @@ export const checkForUrl = (msg: Message): void => {
               paramsMap.set(param, value)
             }
           })
-          console.log(paramsMap)
 
           if (params.str) {
             let paramsStr = ''

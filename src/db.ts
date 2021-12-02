@@ -7,8 +7,16 @@ export const sequelize = new Sequelize('database', 'user', 'password', {
   storage: 'database.sqlite'
 })
 
-export const Tags = sequelize.define('tags', {
-  name: {
+export const AllowedSites = sequelize.define('allowed_sites', {
+  url: {
+    type: DataTypes.STRING,
+    unique: true,
+  },
+  createdBy: DataTypes.STRING,
+})
+
+export const Trackers = sequelize.define('trackers', {
+  tracking_id: {
     type: DataTypes.STRING,
     unique: true,
   },
