@@ -75,7 +75,10 @@ const tracking = async (interaction: CommandInteraction<CacheType>): Promise<voi
   
       const rowCount = await Trackers.destroy({ where: { tracking_id: tagName } })
       if (!rowCount) {return interaction.reply('That tag does not exist.')}
-      return interaction.reply('Tag deleted')
+      return interaction.reply({
+        content: 'Tag deleted',
+        ephemeral: IS_EPHEMERAL,
+      })
       break;
     }    
   }

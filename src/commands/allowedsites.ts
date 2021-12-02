@@ -9,7 +9,7 @@ export const data = new SlashCommandBuilder()
       .setDescription('Adds new allowed site to database')
       .addStringOption(option => option
         .setName('url')
-        .setDescription('Website URL without protocol, eg. domain.com')
+        .setDescription('Website URL _with_ protocol, eg. https://domain.com')
         .setRequired(true))
   })
   .addSubcommand(subcommand => {
@@ -18,7 +18,7 @@ export const data = new SlashCommandBuilder()
       .setDescription('Get details about specific url')
       .addStringOption(option => option
         .setName('url')
-        .setDescription('Website URL without protocol, eg. domain.com')
+        .setDescription('Website URL _with_ protocol, eg. https://domain.com')
         .setRequired(true))
   })
   .addSubcommand(subcommand => {
@@ -32,6 +32,6 @@ export const data = new SlashCommandBuilder()
       .setDescription('Remove specific site from allowed list')
       .addStringOption(option => option
         .setName('url')
-        .setDescription('Website URL without protocol, eg. domain.com')
+        .setDescription('Website URL _with_ protocol, eg. https://domain.com')
         .setRequired(true))
   })

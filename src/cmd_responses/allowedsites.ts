@@ -22,7 +22,7 @@ const allowedsites = async (interaction: CommandInteraction<CacheType>): Promise
         } catch(error) {
           console.error(error)
           return interaction.reply({
-            content: `Looks like the URL was not valid. You typed:\n${allowedUrl}`,
+            content: `Looks like the URL was not valid. You typed:\n${allowedUrl}. Make sure you add the protocol, eg. https://`,
             ephemeral: IS_EPHEMERAL,
           })
         }
@@ -88,7 +88,10 @@ const allowedsites = async (interaction: CommandInteraction<CacheType>): Promise
   
       const rowCount = await AllowedSites.destroy({ where: { url: allowedUrl } })
       if (!rowCount) {return interaction.reply('That URL does not exist.')}
-      return interaction.reply('URL deleted')
+      return interaction.reply({
+        content: 'URL deleted',
+        ephemeral: IS_EPHEMERAL,
+      })
       break;
     }    
   }
