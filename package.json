@@ -6,13 +6,13 @@
   "scripts": {
     "start": "npm run build && node build/index.js",
     "start:dev": "nodemon",
+    "prebuild": "echo '- BUILDING APP -'",
+    "postbuild": "echo '- BUILD COMPLETE -'",
     "build": "rimraf ./build && tsc",
     "lint": "eslint . --ext .ts --fix"
   },
   "pre-push": [
-    "echo '- BUILDING APP -'",
-    "build",
-    "echo '- COMPLETED -'"
+    "build"
   ],
   "engines": {
     "node": "16"
