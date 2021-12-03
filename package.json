@@ -10,7 +10,9 @@
     "lint": "eslint . --ext .ts --fix"
   },
   "pre-push": [
-    "build"
+    "echo '- BUILDING APP -'",
+    "build",
+    "echo '- COMPLETED -'"
   ],
   "engines": {
     "node": "16"

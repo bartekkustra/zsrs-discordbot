@@ -38,7 +38,7 @@ var helpCommand = function (msg, bot) {
         details.forEach(function (command) {
             embed_1.addField(command.cmd, command.desc, false);
         });
-        msg.channel.send(embed_1);
+        msg.channel.send({ embeds: [embed_1] });
     }
 };
 exports.helpCommand = helpCommand;

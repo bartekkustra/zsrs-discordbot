@@ -16,8 +16,8 @@ var gamesBot = function (msg) {
                 name: 'Valheim',
                 desc: [
                     'https://store.steampowered.com/app/892970/Valheim/',
-                    "ip: " + process.env.VALHEIM_IP,
-                    "pass: " + process.env.VALHEIM_PASS,
+                    "ip: ".concat(process.env.VALHEIM_IP),
+                    "pass: ".concat(process.env.VALHEIM_PASS),
                 ]
             }
         ];
@@ -27,7 +27,7 @@ var gamesBot = function (msg) {
         games.forEach(function (game) {
             embed_1.addField(game.name, game.desc.join('\n'), false);
         });
-        msg.channel.send(embed_1);
+        msg.channel.send({ embeds: [embed_1] });
     }
 };
 exports.gamesBot = gamesBot;
