@@ -49,7 +49,7 @@ var fs_1 = __importDefault(require("fs"));
 var cmd_responses_1 = __importDefault(require("./cmd_responses"));
 dotenv_1.default.config();
 var commands = [];
-var commandFiles = fs_1.default.readdirSync('./src/commands').filter(function (file) { return file.endsWith('.ts'); });
+var commandFiles = fs_1.default.readdirSync('./src/commands').filter(function (file) { return file.endsWith('.ts') || file.endsWith('.js'); });
 for (var _i = 0, commandFiles_1 = commandFiles; _i < commandFiles_1.length; _i++) {
     var file = commandFiles_1[_i];
     /* eslint-disable-next-line @typescript-eslint/no-var-requires */
