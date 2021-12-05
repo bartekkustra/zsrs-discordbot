@@ -13,7 +13,7 @@ import RESPONSES from './cmd_responses'
 dotenv.config()
 
 const commands: any[] = []
-const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.ts'))
+const commandFiles = fs.readdirSync('./src/commands').filter(file => file.endsWith('.ts') || file.endsWith('.js'))
 
 for (const file of commandFiles) {
   /* eslint-disable-next-line @typescript-eslint/no-var-requires */

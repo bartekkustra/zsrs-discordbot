@@ -6,9 +6,14 @@
   "scripts": {
     "start": "npm run build && node build/index.js",
     "start:dev": "nodemon",
+    "prebuild": "echo '- BUILDING APP -'",
+    "postbuild": "echo '- BUILD COMPLETE -'",
     "build": "rimraf ./build && tsc",
     "lint": "eslint . --ext .ts --fix"
   },
+  "pre-push": [
+    "build"
+  ],
   "engines": {
     "node": "16"
   },
@@ -30,6 +35,7 @@
     "@typescript-eslint/parser": "^4.15.2",
     "eslint": "^7.20.0",
     "nodemon": "^2.0.7",
+    "pre-push": "^0.1.1",
     "rimraf": "^3.0.2",
     "ts-node": "^9.1.1",
     "typescript": "^4.5.2"
