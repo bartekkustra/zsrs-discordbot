@@ -39,19 +39,80 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-var discord_js_1 = __importDefault(require("discord.js"));
+var discord_js_1 = require("discord.js");
 var dotenv_1 = __importDefault(require("dotenv"));
 var features_1 = __importDefault(require("./features"));
-var checkForEdyta = features_1.default.checkForEdyta, checkForCzarek = features_1.default.checkForCzarek, checkForUrl = features_1.default.checkForUrl, gamesBot = features_1.default.gamesBot, szczepienie = features_1.default.szczepienie, helpCommand = features_1.default.helpCommand;
-var client = new discord_js_1.default.Client();
+var db_1 = require("./db");
+var rest_1 = require("@discordjs/rest");
+var v9_1 = require("discord-api-types/v9");
+var fs_1 = __importDefault(require("fs"));
+var cmd_responses_1 = __importDefault(require("./cmd_responses"));
 dotenv_1.default.config();
+var commands = [];
+var commandFiles = fs_1.default.readdirSync('./src/commands').filter(function (file) { return file.endsWith('.ts'); });
+for (var _i = 0, commandFiles_1 = commandFiles; _i < commandFiles_1.length; _i++) {
+    var file = commandFiles_1[_i];
+    /* eslint-disable-next-line @typescript-eslint/no-var-requires */
+    var command = require("./commands/".concat(file));
+    commands.push(command.data.toJSON());
+}
+var checkForUrl = features_1.default.checkForUrl, gamesBot = features_1.default.gamesBot, helpCommand = features_1.default.helpCommand;
+var client = new discord_js_1.Client({ intents: [
+        discord_js_1.Intents.FLAGS.GUILDS,
+        discord_js_1.Intents.FLAGS.GUILD_MESSAGES,
+        discord_js_1.Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+    ] });
+var rest = new rest_1.REST({ version: '9' }).setToken(process.env.DISCORD_TOKEN);
+// register commands
+(function () { return __awaiter(void 0, void 0, void 0, function () {
+    var error_1;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                console.log('Started refreshing application (/) commands');
+                return [4 /*yield*/, rest.put(v9_1.Routes.applicationGuildCommands(process.env.CLIENT_ID, process.env.GUILD_ID), { body: commands })];
+            case 1:
+                _a.sent();
+                console.log('Successfully reloaded application (/) commands');
+                return [3 /*break*/, 3];
+            case 2:
+                error_1 = _a.sent();
+                console.log(error_1);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
+        }
+    });
+}); })();
+client.on('ready', function () { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        db_1.Trackers.sync();
+        db_1.AllowedSites.sync();
+        console.log('Ready!');
+        return [2 /*return*/];
+    });
+}); });
+client.on('interactionCreate', function (interaction) { return __awaiter(void 0, void 0, void 0, function () {
+    var commandName;
+    return __generator(this, function (_a) {
+        if (!interaction.isCommand()) {
+            return [2 /*return*/];
+        }
+        commandName = interaction.commandName;
+        if (commandName === 'tracking') {
+            cmd_responses_1.default.tracking(interaction);
+        }
+        else if (commandName === 'allowedsites') {
+            cmd_responses_1.default.allowedsites(interaction);
+        }
+        return [2 /*return*/];
+    });
+}); });
 client.on('message', function (msg) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
         if (msg.author === client.user) {
             return [2 /*return*/];
         }
-        checkForEdyta(msg);
-        checkForCzarek(msg);
         checkForUrl(msg);
         gamesBot(msg);
         helpCommand(msg, client.user);
